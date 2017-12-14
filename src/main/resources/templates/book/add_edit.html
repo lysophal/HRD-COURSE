@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 layout:decorator="layout/defaultLayout">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title th:text="${addStatus}?'Add Book':'Edit Book'"></title>
+</head>
+<body>
+
+	<div class="container" layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-12 col-md=12 col-sm-12 col-xs-12">
+				<a class="btn btn-back-cancel pull-right" href="/" th:text="#{btnBack}">Return Home</a>
+				<h3 th:text="${addStatus}?#{addHere}:#{editHere}">Please Add
+					Book Here:</h3>
+				<hr />
+			</div>
+		</div>
+		<div class="row" th:object="${book}">
+			<form class="form-horizontal" th:action="${addStatus}?'/add':'/edit'"
+				method="POST" enctype="multipart/form-data">
+				<div class="form-group" style="display: none;">
+					<label class="control-label col-sm-2" for="id"
+						th:text="#{idNumber}">Id Number:</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="id" th:field="*{id}"
+							th:value="*{id}"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:text="#{title}">Title:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="title"
+							th:field="*{title}" th:value="*{title}" /> <span class="myError"
+							th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="author"
+						th:text="#{author}">Author:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="author"
+							th:field="*{author}" th:value="*{author}" /> <span
+							class="myError" th:if="${#fields.hasErrors('author')}"
+							th:errors="*{author}"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="publishDate"
+						th:text="#{publishDate}">Publish Date:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="publishDate"
+							th:field="*{publishDate}" th:value="*{publishDate}" /> <span
+							class="myError" th:if="${#fields.hasErrors('publishDate')}"
+							th:errors="*{publishDate}"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="page" th:text="#{page}">Page:</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="page"
+							th:field="*{page}" th:value="*{page}" /> <span class="myError"
+							th:if="${#fields.hasErrors('page')}" th:errors="*{page}"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Cover Image</label>
+					<div class="col-sm-10">
+						<!-- <input type="file" name="file" /> -->
+						<input type="hidden" class="form-control" th:field="*{coverImage}" placeholder="Enter Image" />
+						<!-- <label th:text="*{coverImage}"></label> -->
+						<!-- <span class="myError" th:if ="${#fields.hasErrors('coverImage')}" th:errors="*{coverImage}"></span> -->
+						<span th:if="${addStatus}">
+							<input type="file" id="coverImage" name="file" th:text="*{coverImage}"  required="required"/>
+						</span>
+						<span th:unless="${addStatus}">
+							<input type="file" id="coverImage" name="file" th:text="*{coverImage}"/>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-success"
+							th:text="${addStatus}?#{add}:#{edit}"></button>
+						<a href="/" class="btn btn-back-cancel" th:text="#{btnCancel}">Cancel</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+/* div img {
+	
+	margin-top: 13px;
+} */
+.btn-normal {
+	/* height: 18px !important;
+	background-color: red;
+	border-radius: 5px; */
+	width: 80px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+p{
+	text-align: justify;
+}
+.bookbox{
+	display:inline-block;
+	margin-top: 13px;
+	
+}
+
+/* navbar */
+.navbar-default {
+    background-color: #004080;
+    border-color: #004080;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #e6e6e6;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #e6e6e6;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #e6e6e6;
+    /* background-color: #E7E7E7; */
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #e6e6e6;
+    background-color: #D5D5D5;
+}
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* Mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+          color: #333;
+    }
+}
+.my-footer{
+	background-color: #004080;
+	color: white;
+	text-align: center;
+	margin-top: 0px;
+	padding: 55px;
+	border-radius: 5px;
+}
+.myError{
+	color: red;
+}
+/* .table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+	background-color: #bce0ff;
+} */
+.btn-back-cancel{
+	background-color: #004080;
+	color:white;
+}
+.btn-back-cancel:hover{
+	color:white;
+	background-color: #245e92;
+}
+
+
+input[type=search] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    /* font-size: 14px; */
+    background-color: white;
+    background-image: url('/assets/images/searchtion.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin-right: 10px;
+    margin-bottom: 10px
+    
+}
+input[type=search]:focus {
+    width: 92%;
+}
+
+
+

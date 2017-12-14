@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Home Page</title>
+<th:block th:replace="fragment/style"></th:block>
+</head>
+<body>
+	
+	<nav class="navbar navbar-default" th:replace="fragment/header::header">
+		
+	</nav>
+	
+	<div layout:fragment="content">
+		
+	</div>
+
+	<div class="container-fluid" th:replace="fragment/footer::footer">
+		
+	</div>
+	<th:block th:replace="fragment/script"></th:block>
+</body>
+</html>

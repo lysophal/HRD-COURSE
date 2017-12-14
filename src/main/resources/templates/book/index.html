@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 layout:decorator="layout/defaultLayout">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Home Page</title>
+</head>
+<body>
+	
+	<div class="container" layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-12 col-md=12 col-sm-12 col-xs-12">
+				<h1 th:text="#{bookstore}">Book Store</h1>
+				<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+				<hr />
+			</div>
+		</div>
+		<div>
+			<form action="/search" method="GET">
+				<input type="search" name="keyword" th:placeholder="#{btnSearch}+'......'" th:value="${keyword}"/>
+				<input type="submit"  class="btn btn-primary" th:value="#{btnSearch}"/>
+				<br/><br/>
+			</form>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md=12 col-sm-12 col-xs-12">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th th:text="#{cover}">Cover</th>
+							<th th:text="#{id}">Id</th>
+							<th th:text="#{title}">Title</th>
+							<th th:text="#{publishDate}">Publish Date</th>
+							<th th:text="#{author}">Author</th>
+							<th th:text="#{page}">Page</th>
+							<th th:text="#{action}">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="book : ${books}" th:object="${book}">
+							<td><img th:src="*{coverImage}" style="width: 50px; height: 50px"/></td>
+							<td th:text="*{id}"></td>
+							<td th:text="*{title}"></td>
+							<td th:text="*{publishDate}"></td>
+							<td th:text="*{author}"></td>
+							<td th:text="*{page}"></td>
+							<td>
+								<form th:action="@{/remove/{id}(id=*{id})}" method="POST">
+									<a th:href="@{/book/(id=*{id})}" class="btn btn-primary btn-normal" th:text="#{btnView}">View</a>
+									<!-- <input type="submit" th:value="#{btnRemove}" class="btn btn-danger btn-normal"/> -->
+									<a class="btn btn-danger btn-normal" data-toggle="modal" th:attr="data-target='#Modal'+*{id}">Remove</a>
+									<a th:href="@{/edit/(id=*{id})}" class="btn btn-warning btn-normal" role="button" th:text="#{btnEdit}">Edit</a>
+								</form>
+
+								<div class="modal fade" th:id="'Modal'+*{id}" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header" style="background-color:#004080; color: white; ">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Are you sure to delete this record?</h4>
+											</div>
+											<div class="modal-body">
+												<h4>Book's Information</h4>
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+															<span>&nbsp;Id:</span>
+														</div>
+														<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+															<span th:text="*{id}"></span>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+															<span>&nbsp;Title:</span>
+														</div>
+														<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+															<span th:text="*{title}"></span>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+															<span>&nbsp;Publish Date:</span>
+														</div>
+														<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+															<span th:text="*{publishDate}"></span>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+															<span>&nbsp;Author:</span>
+														</div>
+														<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+															<span th:text="*{author}"></span>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+															<span>&nbsp;Page:</span>
+														</div>
+														<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+															<span th:text="*{page}"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+												<form th:action="@{/remove/{id}(id=*{id})}" method="POST">
+													<input type="submit" th:value="#{btnRemove}" class="btn btn-danger btn-normal"/>
+													<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+												</form>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>
