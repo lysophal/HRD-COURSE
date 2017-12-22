@@ -42,4 +42,14 @@ public class BookServiceImp implements BookService {
 		return myBookRepository.searchBook(keyword);
 	}
 
+	@Override
+	public boolean savesaveBookPublisher(int bookId, int publisherid) {
+		return myBookRepository.saveBookPublisher(bookId, publisherid);
+	}
+
+	@Override
+	public boolean deleteBookPublisherByBookId(int BookId) {
+		return myBookRepository.deleteBookPublisherByBookId(BookId);
+	}
+
 }

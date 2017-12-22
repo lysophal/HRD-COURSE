@@ -66,6 +66,35 @@
 							th:if="${#fields.hasErrors('page')}" th:errors="*{page}"></span>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="page" th:text="#{previousPublisher}+': '">Previous Publisher:</label>
+						<span
+							style="display: inline-block; margin: 5px; background-color: #004080; color: white; border-radius: 5px; padding: 0px 5px; font-size: x-small;"
+							th:each="publisher: *{publishers}" th:text="${publisher.name}">
+						</span>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="page" th:text="#{publisher}">Publisher:</label>
+					<div class="col-sm-10">
+						 <div th:each="publisher: ${publishers}" style="margin-bottom: 15px">
+						 	<input type="checkbox" th:name="pId"  th:text="' &nbsp;'+${publisher.name}" th:value="${publisher.id}"/>
+						 </div>
+						<!--  <div th:if="${!addStatus}" th:each="publisher: ${publishers}" style="margin-bottom: 15px">
+						 	<input th:each="cp : *{publishers}" th:checked="${publisher.id == cp.id}" type="checkbox" th:name="pId"  th:text="' &nbsp;'+${publisher.name}" th:value="${publisher.id}"/>
+						 	<span th:each="cp: *{publishers}">
+						 		<span th:if="${publisher.id == cp.id}">
+						 			<input th:checked="${publisher.id == cp.id}" type="checkbox" th:name="pId"  th:text="' &nbsp;'+${publisher.name}" th:value="${publisher.id}"/>
+						 		</span>
+						 		<span th:else="${publisher.id == cp.id}">
+						 			<input type="checkbox" th:name="pId"  th:text="' &nbsp;'+${publisher.name}" th:value="${publisher.id}"/>
+						 		</span>
+						 	</span>
+						 </div> -->
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label class="control-label col-sm-2">Cover Image</label>
 					<div class="col-sm-10">

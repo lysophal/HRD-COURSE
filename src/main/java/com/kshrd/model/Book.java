@@ -1,4 +1,6 @@
 package com.kshrd.model;
+import java.util.List;
+
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -14,6 +16,9 @@ public class Book {
 	@Min(10)
 	private int page;
 	private String coverImage;
+	
+	private List<Publisher> publishers;
+	
 	public Book(){}
 	public Book(int id, String title, String publishDate, String author, int page, String coverImage) {
 		super();
@@ -65,6 +70,11 @@ public class Book {
 		return "Book [id=" + id + ", title=" + title + ", publishDate=" + publishDate + ", author=" + author + ", page="
 				+ page + ", coverImage=" + coverImage + "]";
 	}
-	
+	public List<Publisher> getPublishers() {
+		return publishers;
+	}
+	public void setPublishers(List<Publisher> publishers) {
+		this.publishers = publishers;
+	}
 	
 }

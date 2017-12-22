@@ -17,13 +17,18 @@ import com.github.javafaker.Faker;
 import com.kshrd.model.Book;
 import com.kshrd.service.BookService;
 import com.kshrd.service.FileUploadService;
+import com.kshrd.service.PublisherService;
 
 @Controller
 public class BookController {
 	@Autowired
 	BookService bookService;
+	
 	@Autowired
 	FileUploadService fileUploadService;
+	
+	@Autowired
+	PublisherService publisherService;
 	
 	@GetMapping("/")
 	public String getBooks(Model model){
@@ -45,10 +50,11 @@ public class BookController {
 	public String addBook(Model model){
 		model.addAttribute("addStatus", true);
 		model.addAttribute("book", new Book());
+		model.addAttribute("publishers", publisherService.findAll());
 		return "book/add_edit";
 	}
 	@PostMapping("/add")
-	public String saveBook (@Validated Book b ,BindingResult result, Model model,@RequestParam("file") MultipartFile file){
+	public String saveBook (@Validated Book b ,BindingResult result, Model model,@RequestParam("file") MultipartFile file,@RequestParam(value="pId") Integer[] publisherId){
 		if(result.hasErrors()){
 			for(FieldError error: result.getFieldErrors()){
 				System.out.println(error.getField() +": "+ error.getDefaultMessage());
@@ -57,12 +63,17 @@ public class BookController {
 			model.addAttribute("book", b);
 			return "book/add_edit";
 		}
+		
 		b.setId(bookService.findAll().size()+1);
 		System.out.println(b.getId());
 		String filePath = fileUploadService.uploadFile(file);
 		b.setCoverImage(filePath);
 		System.out.println(filePath);
 		bookService.save(b);
+		for(Integer id : publisherId){
+			System.out.println(id);
+			bookService.savesaveBookPublisher(b.getId(), id);
+		}
 		return "redirect:/";
 	}
 	
@@ -71,10 +82,11 @@ public class BookController {
 		model.addAttribute("addStatus", false);
 		Book b = bookService.findById(id);
 		model.addAttribute("book", b);
+		model.addAttribute("publishers", publisherService.findAll());
 		return "book/add_edit";
 	}
 	@PostMapping("/edit")
-	public String updatBook(@RequestParam("file") MultipartFile file,@Validated Book b ,BindingResult result, Model model){
+	public String updatBook(@RequestParam("file") MultipartFile file,@Validated Book b ,BindingResult result, Model model,@RequestParam(value="pId") Integer[] publisherId){
 		if(result.hasErrors()){
 			for(FieldError error: result.getFieldErrors()){
 				System.out.println(error.getField() +": "+ error.getDefaultMessage());
@@ -87,7 +99,12 @@ public class BookController {
 			b.setCoverImage(fileUploadService.uploadFile(file));
 		}
 		//b.setCoverImage(fileUploadService.uploadFile(file));
+		bookService.deleteBookPublisherByBookId(b.getId());
 		bookService.update(b, b.getId());
+		for(Integer id : publisherId){
+			System.out.println(id);
+			bookService.savesaveBookPublisher(b.getId(), id);
+		}
 		return "redirect:/";
 		
 		

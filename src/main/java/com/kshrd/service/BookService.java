@@ -9,4 +9,6 @@ public interface BookService {
 	public boolean remove(int id);
 	public boolean update(Book b,int id);
 	public List<Book> searchBook(String keyword);
+	public boolean savesaveBookPublisher(int bookId,int publisherid);
+	public boolean deleteBookPublisherByBookId(int BookId);
 }

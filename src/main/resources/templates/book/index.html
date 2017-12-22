@@ -32,6 +32,7 @@
 							<th th:text="#{cover}">Cover</th>
 							<th th:text="#{id}">Id</th>
 							<th th:text="#{title}">Title</th>
+							<th th:text="#{publisher}">Publisher</th>
 							<th th:text="#{publishDate}">Publish Date</th>
 							<th th:text="#{author}">Author</th>
 							<th th:text="#{page}">Page</th>
@@ -43,6 +44,9 @@
 							<td><img th:src="*{coverImage}" style="width: 50px; height: 50px"/></td>
 							<td th:text="*{id}"></td>
 							<td th:text="*{title}"></td>
+							<td>
+								<div style="display:block; margin-bottom:5px" class="label label-primary" th:each="publisher: *{publishers}" th:text="${publisher.name}"></div>
+							</td>
 							<td th:text="*{publishDate}"></td>
 							<td th:text="*{author}"></td>
 							<td th:text="*{page}"></td>
