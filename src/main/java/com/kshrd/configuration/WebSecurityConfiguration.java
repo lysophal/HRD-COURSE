@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -15,10 +16,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	AuthenticationSuccessHandler successHandler;
+	private AuthenticationSuccessHandler successHandler;
 	
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private AuthenticationEntryPoint authenticationEntryPoint;
 	
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth)throws Exception{
@@ -43,10 +47,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/main/index").hasAnyRole("ADMIN","DBA")
-			.antMatchers("/Home").hasAnyRole("USER");
+			.antMatchers("/Home").hasAnyRole("USER","ADMIN");
 		
 		http.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/login");
+		
+		http.exceptionHandling()
+			.authenticationEntryPoint(authenticationEntryPoint);
 	}
 }
