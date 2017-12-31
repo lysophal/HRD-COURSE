@@ -52,10 +52,10 @@
 							<td th:text="*{page}"></td>
 							<td>
 								<form th:action="@{/remove/{id}(id=*{id})}" method="POST">
-									<a th:href="@{/book/(id=*{id})}" class="btn btn-primary btn-normal" th:text="#{btnView}">View</a>
+									<a th:href="@{/main/book/(id=*{id})}" class="btn btn-primary btn-normal" th:text="#{btnView}">View</a>
 									<!-- <input type="submit" th:value="#{btnRemove}" class="btn btn-danger btn-normal"/> -->
 									<a class="btn btn-danger btn-normal" data-toggle="modal" th:attr="data-target='#Modal'+*{id}">Remove</a>
-									<a th:href="@{/edit/(id=*{id})}" class="btn btn-warning btn-normal" role="button" th:text="#{btnEdit}">Edit</a>
+									<a th:href="@{/main/edit/(id=*{id})}" class="btn btn-warning btn-normal" role="button" th:text="#{btnEdit}">Edit</a>
 								</form>
 
 								<div class="modal fade" th:id="'Modal'+*{id}" role="dialog">

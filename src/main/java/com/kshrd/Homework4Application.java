@@ -1,5 +1,6 @@
 package com.kshrd;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.kshrd.repositories.MyBatisBookRepository;
 
 @SpringBootApplication
+@MapperScan("com.kshrd.repositories")
 public class Homework4Application implements ApplicationRunner {
 
 	public static void main(String[] args) {

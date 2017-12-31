@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import com.kshrd.service.FileUploadService;
 import com.kshrd.service.PublisherService;
 
 @Controller
+@RequestMapping("/main")
 public class BookController {
 	@Autowired
 	BookService bookService;
@@ -30,7 +32,7 @@ public class BookController {
 	@Autowired
 	PublisherService publisherService;
 	
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String getBooks(Model model){
 		List<Book> books = bookService.findAll();
 		model.addAttribute("books",books);
@@ -71,10 +73,10 @@ public class BookController {
 		System.out.println(filePath);
 		bookService.save(b);
 		for(Integer id : publisherId){
-			System.out.println(id);
+			//System.out.println(id);
 			bookService.savesaveBookPublisher(b.getId(), id);
 		}
-		return "redirect:/";
+		return "redirect:/main/index";
 	}
 	
 	@GetMapping("/edit/")
@@ -105,7 +107,7 @@ public class BookController {
 			System.out.println(id);
 			bookService.savesaveBookPublisher(b.getId(), id);
 		}
-		return "redirect:/";
+		return "redirect:/main/index";
 		
 		
 	}

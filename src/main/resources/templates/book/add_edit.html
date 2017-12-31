@@ -12,14 +12,14 @@
 	<div class="container" layout:fragment="content">
 		<div class="row">
 			<div class="col-lg-12 col-md=12 col-sm-12 col-xs-12">
-				<a class="btn btn-back-cancel pull-right" href="/" th:text="#{btnBack}">Return Home</a>
+				<a class="btn btn-back-cancel pull-right" href="/main/index" th:text="#{btnBack}">Return Home</a>
 				<h3 th:text="${addStatus}?#{addHere}:#{editHere}">Please Add
 					Book Here:</h3>
 				<hr />
 			</div>
 		</div>
 		<div class="row" th:object="${book}">
-			<form class="form-horizontal" th:action="${addStatus}?'/add':'/edit'"
+			<form class="form-horizontal" th:action="${addStatus}?'/main/add':'/main/edit'"
 				method="POST" enctype="multipart/form-data">
 				<div class="form-group" style="display: none;">
 					<label class="control-label col-sm-2" for="id"
@@ -69,7 +69,11 @@
 				
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="page" th:text="#{previousPublisher}+': '">Previous Publisher:</label>
-						<span
+						<span th:if="${addStatus}"
+							style="display: inline-block; margin: 5px; background-color: #004080; color: white; border-radius: 5px; padding: 0px 5px; font-size: x-small;"
+							th:text="'There is no publisher was selected'">
+						</span>
+						<span th:if="${!addStatus}"
 							style="display: inline-block; margin: 5px; background-color: #004080; color: white; border-radius: 5px; padding: 0px 5px; font-size: x-small;"
 							th:each="publisher: *{publishers}" th:text="${publisher.name}">
 						</span>
@@ -78,10 +82,10 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="page" th:text="#{publisher}">Publisher:</label>
 					<div class="col-sm-10">
-						 <div th:each="publisher: ${publishers}" style="margin-bottom: 15px">
+						 <!-- <div th:each="publisher: ${publishers}" style="margin-bottom: 15px">
 						 	<input type="checkbox" th:name="pId"  th:text="' &nbsp;'+${publisher.name}" th:value="${publisher.id}"/>
 						 </div>
-						<!--  <div th:if="${!addStatus}" th:each="publisher: ${publishers}" style="margin-bottom: 15px">
+						 <div th:if="${!addStatus}" th:each="publisher: ${publishers}" style="margin-bottom: 15px">
 						 	<input th:each="cp : *{publishers}" th:checked="${publisher.id == cp.id}" type="checkbox" th:name="pId"  th:text="' &nbsp;'+${publisher.name}" th:value="${publisher.id}"/>
 						 	<span th:each="cp: *{publishers}">
 						 		<span th:if="${publisher.id == cp.id}">
@@ -92,6 +96,12 @@
 						 		</span>
 						 	</span>
 						 </div> -->
+
+						<select class="selectpicker" data-live-search="true" multiple="multiple" name="pId">
+							<option th:each="publisher: ${publishers}" th:text="${publisher.name}" th:value="${publisher.id}"></option>
+						</select>
+
+
 					</div>
 				</div>
 				
@@ -114,12 +124,27 @@
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-success"
 							th:text="${addStatus}?#{add}:#{edit}"></button>
-						<a href="/" class="btn btn-back-cancel" th:text="#{btnCancel}">Cancel</a>
+						<a href="/main/index" class="btn btn-back-cancel" th:text="#{btnCancel}">Cancel</a>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			$(document).ready(function(){
+				/*<![CDATA[*/
+				 var publishers = [[${book.publishers}]];
+				/* alert(publishers); */
+				var publisherId=[];
+				for(i=0;i<publishers.length;i++){
+					publisherId=publisherId.concat(publishers[i].id);
+				}
+				alert(publisherId);
+				 $('.selectpicker').selectpicker('val',publisherId);
+				 /*]]>*/
+			});
+		</script>
+	</th:block>
 </body>
 </html>
