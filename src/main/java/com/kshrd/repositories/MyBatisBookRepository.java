@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.model.Book;
+import com.kshrd.utility.Paging;
 
 @Repository
 public interface MyBatisBookRepository {
@@ -23,6 +24,18 @@ public interface MyBatisBookRepository {
 		@Result(property = "publishers", column = "id", many = @Many(select = "com.kshrd.repositories.PublisherRepository.findPulisherByBookId"))
 	})
 	public List<Book> findAll();
+	
+	String selectSQL1="select id,title,publishDate,author,page,coverImage from books order by id asc limit #{limit} offset #{offset}";
+	@Select(selectSQL1)
+	@Results({
+		@Result(property="id",column="id"),
+		@Result(property = "publishers", column = "id", many = @Many(select = "com.kshrd.repositories.PublisherRepository.findPulisherByBookId"))
+	})
+	public List<Book> findAllByPagination(Paging page);
+	
+	String countSQL="select count(*) from books";
+	@Select(countSQL)
+	public int countBook();
 	
 	@Select("select * from books where id=#{id}")
 	@Results({

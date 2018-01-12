@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-default" xmlns:th="http://wwww.thymeleaf.org"
+<nav class="navbar navbar-default" xmlns:th="http://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	th:fragment="header">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -16,10 +16,11 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li><a href="/main/index" th:text="#{home}">Home</a></li>
-					<li><a href="/main/add" th:text="#{create}">Create</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/main/add" th:text="#{create}">Create</a></li>
 					<li><a href="#" th:text="#{aboutUs}">About Us</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="label label-primary">Hi, <span sec:authentication="name"></span></span></a></li>
 					<li><a href="/?lang=kh"><img alt=""
 							src="/assets/images/cambodia_flag.png"
 							style="height: 15px; border: 1px solid white;" /> Khmer</a></li>

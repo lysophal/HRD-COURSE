@@ -3,6 +3,10 @@ insert into books (id, title, publishDate, author, page, coverImage) values (2,'
 insert into books (id, title, publishDate, author, page, coverImage) values (3,'Where Angels Fear to Tread','1972-06-17', 'Vince Schiller MD', 22,'http://lorempixel.com/35/50/city/');
 insert into books (id, title, publishDate, author, page, coverImage) values (4,'Many Waters','1953-05-19', 'Aubrey King DDS', 57,'http://lorempixel.com/35/50/nightlife/');
 insert into books (id, title, publishDate, author, page, coverImage) values (5,'A Monstrous Regiment of Women','1978-09-29', 'Lauriane Barton', 94,'http://lorempixel.com/35/50/transport/');
+insert into books (id, title, publishDate, author, page, coverImage) values (6,'A Monstrous Regiment of Women','1978-09-29', 'Lauriane Barton', 94,'http://lorempixel.com/35/50/transport/');
+insert into books (id, title, publishDate, author, page, coverImage) values (7,'A Monstrous Regiment of Women','1978-09-29', 'Lauriane Barton', 94,'http://lorempixel.com/35/50/transport/');
+insert into books (id, title, publishDate, author, page, coverImage) values (8,'A Monstrous Regiment of Women','1978-09-29', 'Lauriane Barton', 94,'http://lorempixel.com/35/50/transport/');
+insert into books (id, title, publishDate, author, page, coverImage) values (9,'A Monstrous Regiment of Women','1978-09-29', 'Lauriane Barton', 94,'http://lorempixel.com/35/50/transport/');
 
 insert into publisher(id,name) values(1,'Ly Sophal Printing Shop');
 insert into publisher(id,name) values(2,'PHD Udorm Printing Shop');

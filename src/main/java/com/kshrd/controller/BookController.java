@@ -19,6 +19,7 @@ import com.kshrd.model.Book;
 import com.kshrd.service.BookService;
 import com.kshrd.service.FileUploadService;
 import com.kshrd.service.PublisherService;
+import com.kshrd.utility.Paging;
 
 @Controller
 @RequestMapping("/main")
@@ -33,9 +34,10 @@ public class BookController {
 	PublisherService publisherService;
 	
 	@GetMapping("/index")
-	public String getBooks(Model model){
-		List<Book> books = bookService.findAll();
+	public String getBooks(Paging paging,Model model){
+		List<Book> books = bookService.findAllByPagination(paging);
 		model.addAttribute("books",books);
+		model.addAttribute("paging", paging);
 		return "book/index";
 	}
 	@GetMapping("/book/") //@RequestParam

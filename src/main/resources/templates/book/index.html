@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	 layout:decorator="layout/defaultLayout">
 <head>
 <meta charset="UTF-8" />
@@ -54,7 +55,9 @@
 								<form th:action="@{/remove/{id}(id=*{id})}" method="POST">
 									<a th:href="@{/main/book/(id=*{id})}" class="btn btn-primary btn-normal" th:text="#{btnView}">View</a>
 									<!-- <input type="submit" th:value="#{btnRemove}" class="btn btn-danger btn-normal"/> -->
-									<a class="btn btn-danger btn-normal" data-toggle="modal" th:attr="data-target='#Modal'+*{id}">Remove</a>
+									<span sec:authorize="hasRole('ROLE_ADMIN')">
+										<a class="btn btn-danger btn-normal" data-toggle="modal" th:attr="data-target='#Modal'+*{id}">Remove</a>
+									</span>
 									<a th:href="@{/main/edit/(id=*{id})}" class="btn btn-warning btn-normal" role="button" th:text="#{btnEdit}">Edit</a>
 								</form>
 
@@ -129,6 +132,23 @@
 						</tr>
 					</tbody>
 				</table>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" th:href="@{/main/index(page=${paging.previousPage})}">Previous</a>
+						</li>
+						<li th:if="${paging.previousPage > 1}">
+							<a>...</a>
+						</li>
+						<li class="page-item" th:each="i: ${#numbers.sequence(paging.startPage, paging.endPage)}" th:class="${paging.page==i?'active':''}">
+							<a class="page-link" th:href="@{/main/index(page=${i})}" th:text="${i}">1</a>
+						</li>
+						<li th:unless="${paging.nextPage >= paging.totalPages}">
+							<a>...</a>
+						</li >
+						<li class="page-item"><a class="page-link" th:href="@{/main/index(page=${paging.nextPage})}">Next</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>	

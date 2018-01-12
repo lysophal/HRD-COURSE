@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kshrd.model.Book;
 import com.kshrd.repositories.MyBatisBookRepository;
+import com.kshrd.utility.Paging;
 @Service
 public class BookServiceImp implements BookService {
 	@Autowired
@@ -50,6 +51,18 @@ public class BookServiceImp implements BookService {
 	@Override
 	public boolean deleteBookPublisherByBookId(int BookId) {
 		return myBookRepository.deleteBookPublisherByBookId(BookId);
+	}
+
+	@Override
+	public List<Book> findAllByPagination(Paging page) {
+		Integer bookCount=countBook();
+		page.setTotalCount(bookCount);
+		return myBookRepository.findAllByPagination(page);
+	}
+
+	@Override
+	public int countBook() {
+		return myBookRepository.countBook();
 	}
 
 }
